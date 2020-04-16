@@ -75,7 +75,7 @@ class Chart extends Component {
             maintainAspectRatio: false,
             title: {
               display: true,
-              text: "Confirmed Cases",
+              text: "STATUS",
               fontSize: 25,
             },
             legend: {
