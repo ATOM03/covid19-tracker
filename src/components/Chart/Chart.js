@@ -69,7 +69,7 @@ class Chart extends Component {
               padding: {
                 top: 32,
                 bottom: 32,
-                left: 52,
+                left: 10,
               },
             },
             maintainAspectRatio: false,

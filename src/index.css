@@ -3,6 +3,7 @@ body {
   font-family: "Archivo";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #161625;
   /* color: white;
   background: linear-gradient(to left, #34495e, #2c3e50); */
 }

@@ -1,8 +1,8 @@
 .header-c {
-  color: rgba(255, 7, 58, 0.6);
+  color: #ff073a;
   /* border: 2px solid #ff073a;
   border-radius: 10px; */
-  background-color: rgba(255, 7, 58, 0.1254);
+  /* background-color: rgba(255, 7, 58, 0.1254); */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -10,9 +10,26 @@
   justify-content: center;
   padding: 5px 5px;
   font-family: "Archivo";
-  font-size: 13px !important;
-  font-weight: 1000;
+  font-size: 17px !important;
+  font-weight: bolder;
   /* transition: 0.5s; */
+}
+.summary {
+  /* width: 100%; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  animation: type 1s ease-in;
+}
+@keyframes type {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .confirmed {
@@ -21,8 +38,8 @@
   font-weight: 700;
 }
 .header-a {
-  color: rgba(0, 123, 255, 0.6);
-  background-color: rgba(0, 123, 255, 0.0627451);
+  color: #007bff;
+  /* background-color: rgba(0, 123, 255, 0.0627451); */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -30,9 +47,9 @@
   justify-content: center;
   padding: 5px 5px;
   font-family: "Archivo";
-  font-size: 13px !important;
+  font-size: 17px !important;
   /* margin-top: 2%; */
-  font-weight: 1000;
+  font-weight: bolder;
 }
 .active {
   color: #007bff;
@@ -40,8 +57,8 @@
   font-weight: 700;
 }
 .header-r {
-  color: rgba(40, 167, 69, 0.6);
-  background-color: rgba(40, 167, 69, 0.12549);
+  color: #28a745;
+  /* background-color: rgba(40, 167, 69, 0.12549); */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -49,8 +66,8 @@
   justify-content: center;
   padding: 5px 5px;
   font-family: "Archivo";
-  font-size: 13px !important;
-  font-weight: 1000;
+  font-size: 17px !important;
+  font-weight: bolder;
 }
 .recovered {
   color: #28a745;
@@ -58,8 +75,8 @@
   font-weight: 700;
 }
 .header-d {
-  color: rgba(108, 117, 125, 0.6);
-  background-color: rgba(108, 117, 125, 0.0627451);
+  color: #6c757d;
+  /* background-color: rgba(108, 117, 125, 0.0627451); */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -67,8 +84,8 @@
   justify-content: center;
   padding: 5px 5px;
   font-family: "Archivo";
-  font-size: 13px !important;
-  font-weight: 1000;
+  font-size: 17px !important;
+  font-weight: bolder;
 }
 .deaths {
   color: #6c757d;
@@ -77,6 +94,6 @@
 }
 @media only screen and (max-width: 600px) {
   .summary {
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
 }

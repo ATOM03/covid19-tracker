@@ -19,23 +19,23 @@ class Header extends Component {
     return (
       <div className="summary">
         <p className="header-c">
-          CONFIRMED CASE :<p>{deltaconfirmed}</p>
+          CONFIRMED <p>{deltaconfirmed}</p>
           <span className="confirmed">{confirmed}</span>
         </p>
 
         <p className="header-a">
-          ACTIVE CASE :
+          ACTIVE
           <p>
             <br />
           </p>
           <span className="active">{active}</span>
         </p>
         <p className="header-r">
-          RECOVERED CASE :<p>{deltarecovered}</p>
+          RECOVERED<p>{deltarecovered}</p>
           <span className="recovered">{recovered}</span>
         </p>
         <p className="header-d">
-          DEATHS CASE : <p>{deltadeaths}</p>
+          DEATHS <p>{deltadeaths}</p>
           <span className="deaths">{deaths}</span>
         </p>
       </div>
