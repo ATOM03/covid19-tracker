@@ -3,6 +3,7 @@ import "./App.css";
 import StateDate from "./components/State/StateData";
 import Header from "./components/Header/Header";
 import Chart from "./components/Chart/Chart";
+import axios from "axios";
 class App extends Component {
   constructor() {
     super();
@@ -19,7 +20,9 @@ class App extends Component {
     };
   }
   async componentDidMount() {
-    const data = await fetch("https://api.covid19india.org/data.json")
+    const data = await fetch(
+      "https://cors-anywhere.herokuapp.com/https://api.covid19india.org/data.json"
+    )
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -33,8 +36,12 @@ class App extends Component {
           deltadeaths: json.statewise[0].deltadeaths,
           case_time: json.cases_time_series,
         });
+      })
+      .catch((e) => {
+        console.log(e);
       });
-    return data;
+
+    // return data;
     // console.log(data);
   }
 
