@@ -41,7 +41,7 @@ class App extends Component {
         console.log(e);
       });
 
-    // return data;
+    return data;
     // console.log(data);
   }
 
