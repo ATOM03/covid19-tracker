@@ -41,3 +41,12 @@
     display: block;
   }
 }
+.ErrorDoc{
+  width: 100vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+}
