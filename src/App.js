@@ -33,7 +33,7 @@ class App extends Component {
   }
   async componentDidMount() {
     const data = await fetch("https://api.covid19india.org/data.json", {
-      mode: "cors",
+      // mode: "cors",
     })
       .then((res) => res.json())
       .then((json) => {
