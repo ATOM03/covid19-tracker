@@ -58,11 +58,11 @@ class Chart extends Component {
     // var data = fetchIndiaData();
     // console.log(this.state.charData);
     return (
-      <div>
+      <div style={{ width: "100%" }}>
         <Line
           data={confirmed}
           width={650}
-          height={400}
+          height={600}
           options={{
             responsive: true,
             layout: {

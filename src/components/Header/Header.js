@@ -12,9 +12,12 @@ class Header extends Component {
     const active = this.thousands_separators(this.props.active);
     const recovered = this.thousands_separators(this.props.recovered);
     const deaths = this.thousands_separators(this.props.deaths);
-    const deltaconfirmed = "[+ " + this.props.deltaconfirmed + "]";
-    const deltarecovered = "[+ " + this.props.deltarecovered + "]";
-    const deltadeaths = "[+ " + this.props.deltadeaths + "]";
+    const deltaconfirmed =
+      "[+ " + this.thousands_separators(this.props.deltaconfirmed) + "]";
+    const deltarecovered =
+      "[+ " + this.thousands_separators(this.props.deltarecovered) + "]";
+    const deltadeaths =
+      "[+ " + this.thousands_separators(this.props.deltadeaths) + "]";
     // console.log(deltaconfirmed);
     return (
       <div className="summary">

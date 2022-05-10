@@ -110,7 +110,7 @@ class App extends Component {
                 />
                 <StateDate status={this.state.status} />
               </div>
-              <div>
+              <div className="chartDiv">
                 <Chart case_time={this.state.case_time} />
               </div>
             </div>
@@ -121,7 +121,7 @@ class App extends Component {
           <Stack spacing={2}>
             <Snackbar
               open={this.state.openSucess}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              // anchorOrigin={{ vertical: "top", horizontal: "right" }}
               autoHideDuration={6000}
               onClose={() => {
                 this.setState({ openSucess: false });
@@ -140,7 +140,7 @@ class App extends Component {
 
             <Snackbar
               open={this.state.openError}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              // anchorOrigin={{ vertical: "top", horizontal: "right" }}
               autoHideDuration={6000}
               onClose={() => {
                 this.setState({ openError: false });
