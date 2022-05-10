@@ -8,6 +8,9 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { margin } from "@mui/system";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -17,6 +20,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      loading: true,
       status: [],
       confirmed: "",
       active: "",
@@ -32,12 +36,13 @@ class App extends Component {
     };
   }
   async componentDidMount() {
-    const data = await fetch("https://api.covid19india.org/data.json", {
+    const data = await fetch("https://covid-19api1.herokuapp.com", {
       // mode: "cors",
     })
       .then((res) => res.json())
       .then((json) => {
         this.setState({
+          loading: false,
           status: json.statewise,
           confirmed: json.statewise[0].confirmed,
           active: json.statewise[0].active,
@@ -53,7 +58,7 @@ class App extends Component {
       })
       .catch((e) => {
         console.log(e);
-        this.setState({ openError: true });
+        this.setState({ openError: true, loading: false });
       });
 
     return data;
@@ -63,8 +68,30 @@ class App extends Component {
   render() {
     const stats = this.state.status;
 
-    if (stats === null) {
-      return <p>Loadiing...</p>;
+    if (this.state.loading) {
+      return (
+        <div className="Loading">
+          <Box
+            sx={{ display: "flex" }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress />
+            <h2
+              style={{
+                marginLeft: "20px",
+                color: "white",
+                letterSpacing: "1px",
+              }}
+            >
+              Loading Please Wait
+            </h2>
+          </Box>
+        </div>
+      );
     } else {
       return (
         <div>
