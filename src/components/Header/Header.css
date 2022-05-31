@@ -8,12 +8,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5px 5px;
+  padding: 40px 13px;
   font-family: "Archivo";
   font-size: 17px !important;
   font-weight: bolder;
+  
   /* transition: 0.5s; */
 }
+.header-c:hover{
+  background: #4D1229;
+  cursor:pointer
+}
+
+ #selectedConf{
+  background: #4D1229;
+}
+
 .summary {
   /* width: 100%; */
   display: flex;
@@ -38,7 +48,7 @@
   font-size: 22px;
   font-weight: 700;
 }
-.header-a {
+.header-a  {
   color: #007bff;
   /* background-color: rgba(0, 123, 255, 0.0627451); */
   border-radius: 10px;
@@ -46,11 +56,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5px 5px;
+  padding: 40px 13px;
   font-family: "Archivo";
   font-size: 17px !important;
   /* margin-top: 2%; */
   font-weight: bolder;
+}
+.header-a:hover{
+  background: #132240;
+  cursor: pointer;
+}
+ #selectedActiv{
+  background: #132240;
 }
 .active {
   color: #007bff;
@@ -65,11 +82,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5px 5px;
+  padding: 40px 13px;
   font-family: "Archivo";
   font-size: 17px !important;
   font-weight: bolder;
 }
+.header-r:hover{
+  background: #1A382D;
+  cursor: pointer;
+}
+ #selectedReco{
+   background: #1A382D;
+ }
 .recovered {
   color: #28a745;
   font-size: 22px;
@@ -83,10 +107,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5px 5px;
+  padding: 40px 13px;
   font-family: "Archivo";
   font-size: 17px !important;
   font-weight: bolder;
+}
+.header-d:hover{
+  background:#262735;
+  cursor: pointer;
+}
+#selectedDea{
+  background:#262735;
 }
 .deaths {
   color: #6c757d;
