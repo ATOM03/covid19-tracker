@@ -10,8 +10,9 @@
   justify-content: center;
   padding: 40px 13px;
   font-family: "Archivo";
-  font-size: 17px !important;
-  font-weight: bolder;
+  font-size: 12px !important;
+  font-weight: 600;
+  letter-spacing: 2px;
   
   /* transition: 0.5s; */
 }
@@ -58,9 +59,10 @@
   justify-content: center;
   padding: 40px 13px;
   font-family: "Archivo";
-  font-size: 17px !important;
+  font-size: 12px !important;
   /* margin-top: 2%; */
-  font-weight: bolder;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 .header-a:hover{
   background: #132240;
@@ -84,8 +86,9 @@
   justify-content: center;
   padding: 40px 13px;
   font-family: "Archivo";
-  font-size: 17px !important;
-  font-weight: bolder;
+  font-size: 12px !important;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 .header-r:hover{
   background: #1A382D;
@@ -109,8 +112,9 @@
   justify-content: center;
   padding: 40px 13px;
   font-family: "Archivo";
-  font-size: 17px !important;
-  font-weight: bolder;
+  font-size: 12px !important;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 .header-d:hover{
   background:#262735;

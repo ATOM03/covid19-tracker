@@ -1,105 +1,81 @@
 import React, { Component } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeConfirmedStatus,
+  changeActiveStatus,
+  changeRecoveredStatus,
+  changeDeathStatus,
+} from "../Redux/HeaderAction";
 import "./Header.css";
-class Header extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isConfirmedSelect: true,
-      isActiveSelected: false,
-      isRecoveredSelected: false,
-      isDeathSelected: false,
-    };
-  }
-  thousands_separators = (num) => {
+
+function Header(props) {
+  const thousands_separators = (num) => {
     var num_parts = num.toString().split(".");
     num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return num_parts.join(".");
   };
+  const dispatch = useDispatch();
+  const headerState = useSelector((state) => state.header);
+  const isConfirmedSelect = headerState.isConfirmedSelect;
+  const isActiveSelected = headerState.isActiveSelected;
+  const isRecoveredSelected = headerState.isRecoveredSelected;
+  const isDeathSelected = headerState.isDeathSelected;
+  const confirmed = thousands_separators(props.confirmed);
+  const active = thousands_separators(props.active);
+  const recovered = thousands_separators(props.recovered);
+  const deaths = thousands_separators(props.deaths);
+  const deltaconfirmed =
+    "[+ " + thousands_separators(props.deltaconfirmed) + "]";
+  const deltarecovered =
+    "[+ " + thousands_separators(props.deltarecovered) + "]";
+  const deltadeaths = "[+ " + thousands_separators(props.deltadeaths) + "]";
+  // console.log(isConfirmedSelect);
+  return (
+    <div className="summary">
+      <p
+        className="header-c"
+        id={isConfirmedSelect ? "selectedConf" : ""}
+        onClick={() => dispatch(changeConfirmedStatus())}
+      >
+        Confirmed <p>{deltaconfirmed}</p>
+        <span className="confirmed">{confirmed}</span>
+      </p>
 
-  render() {
-    const isConfirmedSelect = this.state.isConfirmedSelect;
-    const isActiveSelected = this.state.isActiveSelected;
-    const isRecoveredSelected = this.state.isRecoveredSelected;
-    const isDeathSelected = this.state.isDeathSelected;
-    const confirmed = this.thousands_separators(this.props.confirmed);
-    const active = this.thousands_separators(this.props.active);
-    const recovered = this.thousands_separators(this.props.recovered);
-    const deaths = this.thousands_separators(this.props.deaths);
-    const deltaconfirmed =
-      "[+ " + this.thousands_separators(this.props.deltaconfirmed) + "]";
-    const deltarecovered =
-      "[+ " + this.thousands_separators(this.props.deltarecovered) + "]";
-    const deltadeaths =
-      "[+ " + this.thousands_separators(this.props.deltadeaths) + "]";
-    // console.log(isConfirmedSelect);
-    return (
-      <div className="summary">
-        <p
-          className="header-c"
-          id={isConfirmedSelect ? "selectedConf" : ""}
-          onClick={() => {
-            this.setState({
-              isConfirmedSelect: true,
-              isActiveSelected: false,
-              isRecoveredSelected: false,
-              isDeathSelected: false,
-            });
-          }}
-        >
-          CONFIRMED <p>{deltaconfirmed}</p>
-          <span className="confirmed">{confirmed}</span>
+      <p
+        className="header-a"
+        id={isActiveSelected ? "selectedActiv" : ""}
+        onClick={() => {
+          dispatch(changeActiveStatus());
+        }}
+      >
+        Active
+        <p>
+          <br />
         </p>
-
-        <p
-          className="header-a"
-          id={isActiveSelected ? "selectedActiv" : ""}
-          onClick={() => {
-            this.setState({
-              isConfirmedSelect: false,
-              isActiveSelected: true,
-              isRecoveredSelected: false,
-              isDeathSelected: false,
-            });
-          }}
-        >
-          ACTIVE
-          <p>
-            <br />
-          </p>
-          <span className="active">{active}</span>
-        </p>
-        <p
-          className="header-r"
-          id={isRecoveredSelected ? "selectedReco" : ""}
-          onClick={() => {
-            this.setState({
-              isConfirmedSelect: false,
-              isActiveSelected: false,
-              isRecoveredSelected: true,
-              isDeathSelected: false,
-            });
-          }}
-        >
-          RECOVERED<p>{deltarecovered}</p>
-          <span className="recovered">{recovered}</span>
-        </p>
-        <p
-          className="header-d"
-          id={isDeathSelected ? "selectedDea" : ""}
-          onClick={() => {
-            this.setState({
-              isConfirmedSelect: false,
-              isActiveSelected: false,
-              isRecoveredSelected: false,
-              isDeathSelected: true,
-            });
-          }}
-        >
-          DEATHS <p>{deltadeaths}</p>
-          <span className="deaths">{deaths}</span>
-        </p>
-      </div>
-    );
-  }
+        <span className="active">{active}</span>
+      </p>
+      <p
+        className="header-r"
+        id={isRecoveredSelected ? "selectedReco" : ""}
+        onClick={() => {
+          dispatch(changeRecoveredStatus());
+        }}
+      >
+        Recovered<p>{deltarecovered}</p>
+        <span className="recovered">{recovered}</span>
+      </p>
+      <p
+        className="header-d"
+        id={isDeathSelected ? "selectedDea" : ""}
+        onClick={() => {
+          dispatch(changeDeathStatus());
+        }}
+      >
+        Deaths <p>{deltadeaths}</p>
+        <span className="deaths">{deaths}</span>
+      </p>
+    </div>
+  );
 }
+
 export default Header;

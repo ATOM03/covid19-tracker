@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "./App.css";
 import StateDate from "./components/State/StateData";
 import Header from "./components/Header/Header";
@@ -11,37 +11,36 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { margin } from "@mui/system";
-
+import { Provider } from "react-redux";
+import store from "./components/Redux/Store";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      status: [],
-      confirmed: "",
-      active: "",
-      recovered: "",
-      deaths: "",
-      deltaconfirmed: "",
-      deltarecovered: "",
-      deltadeaths: "",
-      case_time: [],
-      open: false,
-      openSucess: false,
-      openError: false,
-    };
-  }
-  async componentDidMount() {
-    const data = await fetch("https://covid-19api1.herokuapp.com", {
+function App(props) {
+  const [state, setState] = useState({
+    loading: true,
+    status: [],
+    confirmed: "",
+    active: "",
+    recovered: "",
+    deaths: "",
+    deltaconfirmed: "",
+    deltarecovered: "",
+    deltadeaths: "",
+    case_time: [],
+    open: false,
+  });
+  const [openSucess, setOpenSucess] = useState(false);
+  const [openError, setOpenError] = useState(false);
+
+  useEffect(() => {
+    const data = fetch("https://covid-19api1.herokuapp.com", {
       // mode: "cors",
     })
       .then((res) => res.json())
       .then((json) => {
-        this.setState({
+        setState({
           loading: false,
           status: json.statewise,
           confirmed: json.statewise[0].confirmed,
@@ -52,66 +51,64 @@ class App extends Component {
           deltarecovered: json.statewise[0].deltarecovered,
           deltadeaths: json.statewise[0].deltadeaths,
           case_time: json.cases_time_series,
-          openSucess: true,
           open: true,
         });
+        setOpenSucess(true);
       })
       .catch((e) => {
         console.log(e);
-        this.setState({ openError: true, loading: false });
+        setState({ loading: false });
+        setOpenError(false);
       });
 
     return data;
-    // console.log(data);
-  }
+  }, []);
 
-  render() {
-    const stats = this.state.status;
-
-    if (this.state.loading) {
-      return (
-        <div className="Loading">
-          <Box
-            sx={{ display: "flex" }}
+  if (state.loading) {
+    return (
+      <div className="Loading">
+        <Box
+          sx={{ display: "flex" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress />
+          <h2
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              marginLeft: "20px",
+              color: "white",
+              letterSpacing: "1px",
             }}
           >
-            <CircularProgress />
-            <h2
-              style={{
-                marginLeft: "20px",
-                color: "white",
-                letterSpacing: "1px",
-              }}
-            >
-              Loading Please Wait
-            </h2>
-          </Box>
-        </div>
-      );
-    } else {
-      return (
+            Loading Please Wait
+          </h2>
+        </Box>
+      </div>
+    );
+  } else {
+    return (
+      <Provider store={store}>
         <div>
           <h1 className="header">COVID19-INDIA</h1>
-          {this.state.open ? (
+          {state.open ? (
             <div className="flex">
               <div className="status">
                 <Header
-                  confirmed={this.state.confirmed}
-                  active={this.state.active}
-                  recovered={this.state.recovered}
-                  deaths={this.state.deaths}
-                  deltaconfirmed={this.state.deltaconfirmed}
-                  deltarecovered={this.state.deltarecovered}
-                  deltadeaths={this.state.deltadeaths}
+                  confirmed={state.confirmed}
+                  active={state.active}
+                  recovered={state.recovered}
+                  deaths={state.deaths}
+                  deltaconfirmed={state.deltaconfirmed}
+                  deltarecovered={state.deltarecovered}
+                  deltadeaths={state.deltadeaths}
                 />
-                <StateDate status={this.state.status} />
+                <StateDate status={state.status} />
               </div>
               <div className="chartDiv">
-                <Chart case_time={this.state.case_time} />
+                <Chart case_time={state.case_time} />
               </div>
             </div>
           ) : (
@@ -120,16 +117,16 @@ class App extends Component {
 
           <Stack spacing={2}>
             <Snackbar
-              open={this.state.openSucess}
+              open={openSucess}
               // anchorOrigin={{ vertical: "top", horizontal: "right" }}
               autoHideDuration={6000}
               onClose={() => {
-                this.setState({ openSucess: false });
+                setOpenSucess(false);
               }}
             >
               <Alert
                 onClose={() => {
-                  this.setState({ openSucess: false });
+                  setOpenSucess(false);
                 }}
                 severity="success"
                 sx={{ width: "100%" }}
@@ -139,16 +136,16 @@ class App extends Component {
             </Snackbar>
 
             <Snackbar
-              open={this.state.openError}
+              open={openError}
               // anchorOrigin={{ vertical: "top", horizontal: "right" }}
               autoHideDuration={6000}
               onClose={() => {
-                this.setState({ openError: false });
+                setState({ openError: false });
               }}
             >
               <Alert
                 onClose={() => {
-                  this.setState({ openError: false });
+                  setState({ openError: false });
                 }}
                 severity="error"
                 sx={{ width: "100%" }}
@@ -158,8 +155,8 @@ class App extends Component {
             </Snackbar>
           </Stack>
         </div>
-      );
-    }
+      </Provider>
+    );
   }
 }
 
