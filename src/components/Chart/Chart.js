@@ -1,14 +1,23 @@
 import React, { Component } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Line } from "react-chartjs-2";
 // import fetchIndiaData from "./Fetched";
-class Chart extends Component {
-  chartFunction = (chartdata) => {
+
+function Chart(props) {
+  const headerState = useSelector((state) => state.header);
+  const isConfirmedSelect = headerState.isConfirmedSelect;
+  const isActiveSelected = headerState.isActiveSelected;
+  const isRecoveredSelected = headerState.isRecoveredSelected;
+  const isDeathSelected = headerState.isDeathSelected;
+
+  const chartFunction = (chartdata) => {
     let data = {
       indiaChartData: {
         labels: [],
         datasets: [],
       },
     };
+
     let totalConfimed = {
       label: "Total Confirmed Cases",
       data: [],
@@ -17,6 +26,7 @@ class Chart extends Component {
       hoverBorderColor: "rgb(255, 7, 58)",
       pointHoverRadius: 5,
     };
+
     let totalDeaths = {
       label: "Total Deaths",
       data: [],
@@ -39,10 +49,15 @@ class Chart extends Component {
     for (let i = 10; i < chartData.length; i += 2) {
       var chart = chartData[i];
       data.indiaChartData.labels.push(chart.date);
-
-      totalConfimed.data.push(chart.totalconfirmed);
-      totalDeaths.data.push(chart.totaldeceased);
-      totalRecovered.data.push(chart.totalrecovered);
+      if (isConfirmedSelect) {
+        totalConfimed.data.push(chart.totalconfirmed);
+      }
+      if (isDeathSelected) {
+        totalDeaths.data.push(chart.totaldeceased);
+      }
+      if (isRecoveredSelected) {
+        totalRecovered.data.push(chart.totalrecovered);
+      }
     }
 
     data.indiaChartData.datasets.push(totalConfimed);
@@ -52,64 +67,38 @@ class Chart extends Component {
     console.log(data);
     return data.indiaChartData;
   };
-  render() {
-    var confirmed = this.chartFunction(this.props.case_time);
-    // console.log(this.props.case_time);
-    // var data = fetchIndiaData();
-    // console.log(this.state.charData);
-    return (
-      <div style={{ width: "100%" }}>
-        <Line
-          data={confirmed}
-          width={650}
-          height={600}
-          options={{
-            responsive: true,
-            layout: {
-              padding: {
-                top: 32,
-                bottom: 32,
-                left: 10,
-              },
+
+  const confirmed = chartFunction(props.case_time);
+
+  return (
+    <div style={{ width: "100%" }}>
+      <Line
+        data={confirmed}
+        width={650}
+        height={600}
+        options={{
+          responsive: true,
+          layout: {
+            padding: {
+              top: 32,
+              bottom: 32,
+              left: 10,
             },
-            maintainAspectRatio: false,
-            title: {
-              display: true,
-              text: "STATUS",
-              fontSize: 25,
-            },
-            legend: {
-              display: true,
-              position: "top",
-            },
-          }}
-        />
-        {/* <Line
-          data={data}
-          width={750}
-          height={400}
-          options={{
-            responsive: true,
-            layout: {
-              padding: {
-                top: 32,
-                bottom: 32,
-              },
-            },
-            title: {
-              display: true,
-              text: "Confirmed Cases",
-              fontSize: 25,
-            },
-            legend: {
-              display: true,
-              position: "top",
-            },
-          }}
-        /> */}
-      </div>
-    );
-  }
+          },
+          maintainAspectRatio: false,
+          title: {
+            display: true,
+            text: "STATUS",
+            fontSize: 25,
+          },
+          legend: {
+            display: true,
+            position: "top",
+          },
+        }}
+      />
+    </div>
+  );
 }
 
 export default Chart;
